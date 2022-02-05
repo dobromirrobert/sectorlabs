@@ -1,70 +1,33 @@
-# Getting Started with Create React App
+# Proiect interviu SectorLabs
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Proiectul implementat respecta toate cerintele functionale din assessment astfel incat cauta dupa toate GIST-urile unui user afisand informatile fiecarui GIST gasit astfel:
+    - Titlul cardulului reprezinta descrierea acestuia
+    - Data la care a fost creat si ultima oara cand a fost facut update pe acesta.
+    - Tags reprezinta tipurile de fisiere care au fost gasite
+    - Lista cu fisierele ordonata dupa tipul de fisier (daca se apasa click pe unul dintre fisiere se deschide un modal cu continutul fisierului respectiv)
+    - Urmatoarele randuri reprezinta ultimele 3 fork-urilor efectuate(acest lucru se face prin aducerea listei de fork-uri la care se face reverse si se elimina fork-urile facute de acelas user urmand sa luam doar primele 3 elemente)
+    - Butonul de vizualizare ne redirectioneaza catre link-ul de Github al GIST-ului
 
-## Available Scripts
+Pentru aranjarea in pagina am folosit Boostrap pentru a crea o pagina responsive.
 
-In the project directory, you can run:
 
-### `npm start`
+*Inainte de pornirea aplicatiei trebuie sa se seteze in /Settings/System.js variabila  "GitHubToken"*
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+## Optimizari
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+Call-urile de aducere a fork-urile se fac independent pentru fiecare card dupa ce pagina a fost incarcata, scazand timpul necesar de asteptare si permite o vizualizare continua fara a fi necesarea asteptarea informatiei pentru toate cardurile.
 
-### `npm test`
+Descarcarea continutului fisierelor se face doar la apasarea pentru a deschide modalul pentru nu a ingreuna incarcarea paginii.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
 
-### `npm run build`
+## Imbunatari posibile
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+Aducerea si afisarea comentarilor, crearea unui preview a unuia dintre fisierele GIST-ului.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+Cautarea directa a userilor care au facut fork prin apasarea pe numele acestora.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+Vizualizarea fork-urilor facute de useri astfel incat sa se poata accesa si fisiere modificate.
 
-### `npm run eject`
+Injectarea token-ului pentru GitHub API la momentul compilarii pentru a elimina expunerea de secrete in codul sursa
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
