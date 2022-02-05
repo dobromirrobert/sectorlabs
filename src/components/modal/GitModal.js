@@ -1,39 +1,59 @@
+import React, { useEffect, useState } from 'react'
 import { Container, Col, Row, Modal, Button } from 'react-bootstrap';
+import { getGistFileContent } from '../../api/gists'
+import Image from 'react-bootstrap/Image'
+import loader from '../../assets/images/loader.svg'
 
-export default function GitModal(props) {
+export default function GitModal({ show, title, url, onHide }) {
+    const [loading, setLoading] = useState(true);
+    const [content, setContent] = useState("");
+
+    const displayContent = () => {
+        if (loading) {
+            return (
+                <>
+                    <Image src={loader} roundedCircle={true} fluid={true} style={{ height: "2.5rem" }} />
+                    <div className="py-1">Loading file ...</div>
+                </>
+            );
+        }
+
+        return (
+            <Row>
+                <Col>
+                    <pre>
+                        {content}
+                    </pre>
+                </Col>
+            </Row>
+        );
+    }
+
+    useEffect(() => {
+        if (show) {
+            getGistFileContent(url, (response) => {
+                setLoading(false);
+                setContent(response);
+            }, () => {
+                setContent("Error while fetching the file content.");
+            })
+        }
+    }, [show, url])
+
     return (
-        <Modal {...props} aria-labelledby="contained-modal-title-vcenter">
+        <Modal show={show} onHide={onHide} aria-labelledby="contained-modal-title-vcenter" size="lg">
             <Modal.Header closeButton>
                 <Modal.Title id="contained-modal-title-vcenter">
-                    Using Grid in Modal
+                    {title}
                 </Modal.Title>
             </Modal.Header>
             <Modal.Body className="show-grid">
                 <Container>
-                    <Row>
-                        <Col xs={12} md={8}>
-                            .col-xs-12 .col-md-8
-                        </Col>
-                        <Col xs={6} md={4}>
-                            .col-xs-6 .col-md-4
-                        </Col>
-                    </Row>
-
-                    <Row>
-                        <Col xs={6} md={4}>
-                            .col-xs-6 .col-md-4
-                        </Col>
-                        <Col xs={6} md={4}>
-                            .col-xs-6 .col-md-4
-                        </Col>
-                        <Col xs={6} md={4}>
-                            .col-xs-6 .col-md-4
-                        </Col>
-                    </Row>
+                    {displayContent()}
                 </Container>
             </Modal.Body>
             <Modal.Footer>
-                <Button onClick={props.onHide}>Close</Button>
+                <Button onClick={onHide}>Close</Button>
             </Modal.Footer>
         </Modal>
     );
